@@ -50,7 +50,7 @@ class EEGClassifier:
         processed_data = test_data.copy()
 
         if 'label' not in processed_data.columns:
-            return None, None, "Error: Invalid dataset format. Ensure the 'label' column has valid values."
+            return None, None, "Error: The dataset used is not EEG Signals dataset."
 
         processed_data['label'] = processed_data['label'].map(LABEL_MAPPING)
 
@@ -59,7 +59,7 @@ class EEGClassifier:
             numeric_cols.remove('label')
 
         if processed_data['label'].isna().sum() > 0 or len(numeric_cols) == 0:
-            return None, None, "Error: Invalid dataset format. Ensure the 'label' column has valid values."
+            return None, None, "Error: The dataset used is not EEG Signals dataset."
 
         processed_data[numeric_cols] = self.scaler.fit_transform(processed_data[numeric_cols])
 
